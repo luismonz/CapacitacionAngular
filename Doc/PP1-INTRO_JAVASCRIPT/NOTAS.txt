@@ -1,0 +1,231 @@
+FUNCION PURA
+
+Es aquella que siempre devuelve el mismo resultado si recibe los mismos argumentos, y no tiene efectos secundarios.
+
+function suma(a, b) {
+  return a + b;
+}
+
+console.log(suma(3, 5)); // Siempre retorna 8
+
+---
+
+let counter = 0;
+
+function increment() {
+  counter++;  // Esto es un efecto secundario porque modifica el estado fuera de la función
+}
+
+-----------------------------------------------------------------------------------------------
+
+Una promesa representa el resultado de una operación asíncrona. Puede estar en tres estados:
+pending (pendiente)
+fulfilled (cumplida)
+rejected (rechazada)
+
+
+
+function obtenerUsuario(callback) {
+  setTimeout(() => {
+    console.log("Usuario obtenido");
+    callback({ id: 1, nombre: "Erick" });
+  }, 1000);
+}
+
+function obtenerPedidos(usuarioId, callback) {
+  setTimeout(() => {
+    console.log("Pedidos obtenidos");
+    callback(["pedido1", "pedido2"]);
+  }, 1000);
+}
+
+function obtenerDetallesPedido(pedidoId, callback) {
+  setTimeout(() => {
+    console.log("Detalles del pedido obtenidos");
+    callback({ id: pedidoId, producto: "Camisa" });
+  }, 1000);
+}
+
+// Callback Hell
+obtenerUsuario(usuario => {
+  obtenerPedidos(usuario.id, pedidos => {
+    obtenerDetallesPedido(pedidos[0], detalles => {
+      console.log("Resultado final:", detalles);
+    });
+  });
+});
+
+
+-----------------
+
+function obtenerUsuario() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      console.log("Usuario obtenido");
+      resolve({ id: 1, nombre: "Erick" });
+    }, 1000);
+  });
+}
+
+function obtenerPedidos(usuarioId) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      console.log("Pedidos obtenidos");
+      resolve(["pedido1", "pedido2"]);
+    }, 1000);
+  });
+}
+
+function obtenerDetallesPedido(pedidoId) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      console.log("Detalles del pedido obtenidos");
+      resolve({ id: pedidoId, producto: "Camiseta" });
+    }, 1000);
+  });
+}
+
+// Uso con Promesas
+obtenerUsuario()
+  .then(usuario => obtenerPedidos(usuario.id))
+  .then(pedidos => obtenerDetallesPedido(pedidos[0]))
+  .then(detalles => console.log("Resultado final:", detalles))
+  .catch(error => console.error(error));
+
+---------------------
+
+function obtenerUsuario() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      console.log("Usuario obtenido");
+      resolve({ id: 1, nombre: "Erick" });
+    }, 1000);
+  });
+}
+
+function obtenerPedidos(usuarioId) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      console.log("Pedidos obtenidos");
+      resolve(["pedido1", "pedido2"]);
+    }, 1000);
+  });
+}
+
+function obtenerDetallesPedido(pedidoId) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      console.log("Detalles del pedido obtenidos");
+      resolve({ id: pedidoId, producto: "Camisa" });
+    }, 1000);
+  });
+}
+
+// Uso con Async/Await
+async function flujoAsincrono() {
+  try {
+    const usuario = await obtenerUsuario();
+    const pedidos = await obtenerPedidos(usuario.id);
+    const detalles = await obtenerDetallesPedido(pedidos[0]);
+    console.log("Resultado final:", detalles);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+flujoAsincrono();
+
+
+
+-----------------------------------------------------------------------------------------------
+
+
+FUNCIONES DE ORDEN SUPERIOR
+
+son funciones que toman otras funciones como parámetros o devuelven funciones.
+
+
+function aplicarOperacion(a, b, operacion) {
+  return operacion(a, b);
+}
+
+function sumarNumeros(a, b) {
+  return a + b;
+}
+
+const resultado = aplicarOperacion(5, 3, sumarNumeros);
+
+console.log(resultado); // 8
+
+---
+
+FUNCION QUE DEVUELVE OTRA FUNCION
+
+function multiplicador(factor) {
+  return function(x) {
+    return x * factor;
+  };
+}
+
+const duplicar = multiplicador(2);
+const triplicar = multiplicador(3);
+console.log(duplicar(4)); // 8
+
+
+
+-----------------------------------------------------------------------------------------------
+
+FUNCIONES ANÓNIMAS (LAMBDAS)
+
+son funciones sin nombre. Se utilizan mucho en funciones de orden superior o cuando no necesitas reutilizar la función en otras partes del código.
+
+const sumarDosNumsLambda = (n1, n2) => n1 + n2;
+const concatenarMensajes = (m1, m2) => {
+	let mensajeTemp = 'MENSAJE TEST';
+	return m1 + m2 + mensajeTemp;
+}
+
+console.log(sumarDosNumsLambda(2,3));
+console.log(concatenarMensajes('DSA', 'DASDA'));
+
+
+-----------------------------------------------------------------------------------------------
+
+CLOSURE
+
+una función que mantiene acceso a su contexto de ejecución incluso después de que la función externa haya terminado de ejecutarse.
+
+function sumClosure() {
+  let sum = 0;
+  return (x, y) => {
+    sum += x + y;
+    return sum;
+  };
+}
+
+const sum = sumClosure();
+console.log(sum(2, 3)); // 5
+console.log(sum(5, 5)); // 15
+
+
+
+
+-----------------------------------------------------------------------------------------------
+
+
+FUNCION DE COMPOSICION
+
+consiste en combinar varias funciones para que el resultado de una función sea el input de la siguiente.
+
+const compose = (f, g) => x => f(g(x));
+
+const add1 = x => x + 1;
+const multiply2 = x => x * 2;
+
+const addThenMultiply = compose(multiply2, add1);
+console.log(addThenMultiply(3)); // (3 + 1) * 2 = 8
+
+
+-----------------------------------------------------------------------------------------------
+
+

@@ -1,0 +1,41 @@
+
+
+git init -- rama por defecto
+git status -- check the status of local repo
+
+git add XXX -- añadir archivos
+git add . -- añadir todos
+git rm --cached XXX -- quitar archivos de staging
+git rm --cached -r . -- quitar todos
+
+git commit --m "YOUR MESSAGE"
+
+Para saber en qué rama estás trabajando, ejecuta:
+
+git branch
+
+CREAR RAMA>
+git checkout -b nuevaRama
+
+VOLVER A RAMA>
+git checkout XXX
+git switch XXX
+
+MERGE>
+git merge XXX
+
+LOG>
+git log
+
+ELIMINAR RAMA>
+git branch -D nuevaRama
+
+MANEJO DE HISTORIAL Y CORRECCIÓN DE ERRORES
+
+TAG> ETIQUETA PARA RECORDAR UN COMMIT COMO VERSION 1, VERSION ALFA, VERSION BETA... ES UN HITO IMPORTANTE!
+	AVANCE MAYOR EN LAS VERSIONES...
+git tag -a v1.0.0 -m "FIRST VERSION" -- CREAR TAG
+git tag -d v1.0.0 -- ELIMINAR
+git tag --PERMITE navegar entre commits por etiquetas
+git show TAG_NAME --PERMITE VER LOS CAMBIOS DE ESOS HITOS
+

@@ -1,0 +1,119 @@
+
+BLOQUEANTE
+const fs = require('fs');
+
+console.log("Inicio de la lectura");
+let data = fs.readFileSync('test.txt', 'utf8'); // Bloqueante
+console.log("Lectura completada");
+
+
+ASINCRONO
+const fs = require('fs');
+
+console.log("Inicio de la lectura");
+fs.readFile('test.txt', 'utf8', (err, data) => { // No bloqueante
+  if (err) throw err;
+  console.log("Lectura completada");
+});
+console.log("Continúa ejecutándose...");
+
+
+
+
+PRIORIDADES
+console.log('Inicio');
+
+setTimeout(() => {
+  console.log('setTimeout');
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('Promesa resuelta');
+});
+
+console.log('Fin');
+
+------------------------------------------------------------------------------------------
+
+npm init
+
+
+npm i <package-name>     SAVES THAT DEPENDENCY ON PRODUCTION (SAME WITH FLAG -s)
+npm i <package-name> -D  SAVES ON DEV DEPENDENCY
+npm i <package-name> -g  SAVES GLOBALLY (LIKE INSTALLING ANGULAR)
+npm i <package-name> -O  SAVES IT AS OPTIONAL (USUALLY REQUESTS npm fund TO RUN)
+npm i <package-name> -E  SAVES IT WITHOUT "^" [CHECK MANAGING OF VERSIONING]
+
+	mm AND pp ARE USED WITH A CARET (^)
+	pp IS JUST USED WITH A TILDE (~)
+
+npm i <package-name> --dry-run 	SIMULATE INSTALL OF A DEPENDENCY
+npm i <pkg>@<version>		INTALL CERTAIN VERSION OF A DEPENDENCY
+
+npm outdate	-- checks which packages needs an update
+
+npm uninstall <package-name>
+
+npm run SCRIPT		RUN A SCRIPT
+npm run <script-name-with-error> --dd
+
+npm cache clean --force
+
+npm audit	CHECK FOR CHANGES THAT CAN AFFECT OUR PROJECT
+npm audit --json
+
+
+npm publish
+
+------------------------------------------------------------------------------------------
+
+MODULOS EN JS
+
+// index.js
+function saludar(nombre) {
+    return `¡Hola, ${nombre}!`;
+}
+
+module.exports = saludar;
+
+//
+const saludar = require('mi-paquete');
+console.log(saludar('Juan')); // ¡Hola, Juan!
+
+------------------------------------------------------------------------------------------
+
+ESTUDIO SOBRE TS: https://earlbarr.com/publications/typestudy.pdf
+
+
+import { People } from "./models/People";
+
+let testNumber: number = 312
+let arrNumbers: number[] = [1, 2, 3, 4]
+
+function sumNumbers(numbers: number[]) {
+    return numbers.reduce((acc, curr) => acc + curr);
+}
+
+console.log(sumNumbers(arrNumbers))
+
+let people: People = new People('LUIS', 18);
+
+console.log(people);
+
+
+export class People 
+{
+
+    public name: string;
+    public age: number;
+
+    constructor(name: string, age: number)
+    {
+        this.name = name;
+        this.age = age;
+    }
+
+}
+
+
+
