@@ -1,0 +1,19 @@
+{
+  "name": "03-ssr",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && npx esbuild src/client/main.ts --bundle --outfile=public/main.js --format=iife",
+    "dev": "node dist/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "express": "^5.1.0",
+    "path": "^0.12.7",
+    "typescript": "^5.8.3"
+  }
+}
