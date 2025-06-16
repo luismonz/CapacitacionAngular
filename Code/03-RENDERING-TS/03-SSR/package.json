@@ -1,19 +1,17 @@
 {
-  "name": "01-static-rendering",
+  "name": "03-ssr",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc && node dist/main.js"
+    "dev": "tsc && node dist/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@types/node": "^24.0.3",
-    "dotenv": "^16.5.0",
-    "fs": "^0.0.1-security",
-    "path": "^0.12.7",
+    "@types/express": "^5.0.3",
+    "express": "^5.1.0",
     "typescript": "^5.8.3"
   }
 }
