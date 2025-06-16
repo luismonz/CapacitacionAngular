@@ -1,0 +1,19 @@
+{
+  "name": "01-static-rendering",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc && node dist/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/node": "^24.0.3",
+    "dotenv": "^16.5.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "typescript": "^5.8.3"
+  }
+}
